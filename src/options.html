@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>LGTM Approve の設定</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="options">
+  <h1>LGTM Approve の設定</h1>
+  <label>GitHub のトークン
+    <input id="token" type="password" autocomplete="off" placeholder="github_pat_...">
+  </label>
+  <p class="muted">Fine-grained token なら、対象のリポジトリに Pull requests の Read and write を付ける。Classic token なら repo スコープ。トークンはこのブラウザの chrome.storage.local にだけ保存する。</p>
+  <button id="save" type="button" class="primary">保存</button>
+  <p id="status" role="status"></p>
+  <script type="module" src="options.js"></script>
+</body>
+</html>
