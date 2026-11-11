@@ -19,11 +19,18 @@ GitHub の PR を、LGTM 画像付きで Approve する Chrome 拡張。PR ペ�
 
 1. `chrome://extensions` を開き、デベロッパーモードを有効にする
 2. 「パッケージ化されていない拡張機能を読み込む」でこのリポジトリのディレクトリを選ぶ
-3. 開いた設定画面で GitHub のトークンを保存する
-   - Fine-grained token なら、対象リポジトリに Pull requests の Read and write
-   - Classic token なら `repo` スコープ
+3. 開いた設定画面で GitHub のトークンを保存する。保存するときに `GET /user` でトークンを確かめ、ログイン名を表示する
 
 トークンは `chrome.storage.local` にだけ保存され、`api.github.com` にだけ送られる。
+
+### トークンの権限
+
+| 種類 | 付ける権限 |
+|---|---|
+| Fine-grained token | 対象リポジトリに Pull requests の Read and write |
+| Classic token | `repo`（親のチェックボックス。private リポジトリの PR を Approve できる下位項目は無い）。公開リポジトリだけなら `public_repo` でよい |
+
+SAML SSO を使う Organization のリポジトリでは、トークン一覧の Configure SSO からその Organization を Authorize する。しないと Approve が 403 になる。
 
 ## Approve しない PR
 
@@ -32,10 +39,20 @@ Approve を押した時点で次を確かめ、当てはまれば投稿せずに
 - PR が open でない（closed / merged）
 - PR の作成者が自分（GitHub は自分の PR を Approve できない）
 
+## ファイル構成
+
+| ファイル | 役割 |
+|---|---|
+| `manifest.json` | Manifest V3 の定義。ポップアップ、設定画面、API を呼ぶホストの許可 |
+| `src/sources.js` | 画像の取得元の一覧と、画像を 1 枚選んで Markdown にする処理 |
+| `src/github.js` | PR の URL の解析と、GitHub API の呼び出し（Approve してよいかの確認、Approve の投稿） |
+| `src/popup.*` | PR ページで開くポップアップ |
+| `src/options.*` | トークンを保存する設定画面 |
+
 ## テスト
 
 ```bash
 npm test
 ```
 
-取得元ごとのテストは本物の API を呼び、返った画像の URL に実際に届くかを確かめる。
+依存パッケージは無い（Node.js 18 以降の `node:test` と `fetch` を使う）。取得元ごとのテストは本物の API を呼び、返った画像の URL に実際に届くかを確かめる。
