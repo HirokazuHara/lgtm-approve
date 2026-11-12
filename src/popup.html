@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <p id="pr" class="muted"></p>
+  <label>画像の取得元
+    <select id="source"></select>
+  </label>
+  <figure id="preview">
+    <img id="image" alt="LGTM 画像">
+  </figure>
+  <div class="row">
+    <button id="shuffle" type="button">別の画像</button>
+    <button id="approve" type="button" class="primary" disabled>Approve</button>
+  </div>
+  <p id="status" role="status"></p>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

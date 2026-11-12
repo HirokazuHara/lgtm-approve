@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "LGTM Approve",
+  "version": "0.1.0",
+  "description": "GitHub の PR を LGTM 画像付きで Approve する",
+  "action": { "default_popup": "src/popup.html", "default_title": "LGTM Approve" },
+  "options_page": "src/options.html",
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": [
+    "https://api.github.com/*",
+    "https://lgtmeow.com/*",
+    "https://lgtmoon.dev/*"
+  ]
+}
