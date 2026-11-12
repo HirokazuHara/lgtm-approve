@@ -48,6 +48,7 @@ Approve を押した時点で次を確かめ、当てはまれば投稿せずに
 | `src/github.js` | PR の URL の解析と、GitHub API の呼び出し（Approve してよいかの確認、Approve の投稿） |
 | `src/popup.*` | PR ページで開くポップアップ |
 | `src/options.*` | トークンを保存する設定画面 |
+| `icons/` | 拡張のアイコン（16 / 32 / 48 / 128 px）。`tools/make-icons.py` で生成する |
 
 ## テスト
 
@@ -56,3 +57,13 @@ npm test
 ```
 
 依存パッケージは無い（Node.js 18 以降の `node:test` と `fetch` を使う）。取得元ごとのテストは本物の API を呼び、返った画像の URL に実際に届くかを確かめる。
+
+## アイコンを作り直す
+
+`assets/icon-source.jpeg`（Gemini で黒背景に描いた元画像）から、黒を透過にして 4 サイズの PNG を作る。Pillow、NumPy、SciPy が要る。
+
+```bash
+python tools/make-icons.py assets/icon-source.jpeg icons
+```
+
+元画像を差し替えるときは、スクリプト冒頭の定数（右下の円の中心と半径 `CHECK_CIRCLE` など）を新しい画像に合わせる。

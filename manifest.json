@@ -3,9 +3,25 @@
   "name": "LGTM Approve",
   "version": "0.1.0",
   "description": "GitHub の PR を LGTM 画像付きで Approve する",
-  "action": { "default_popup": "src/popup.html", "default_title": "LGTM Approve" },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "src/popup.html",
+    "default_title": "LGTM Approve",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
   "options_page": "src/options.html",
-  "permissions": ["storage", "activeTab"],
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
   "host_permissions": [
     "https://api.github.com/*",
     "https://lgtmeow.com/*",
